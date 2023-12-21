@@ -1,0 +1,21 @@
+func add(x, y int) int {
+	return x + y
+}
+
+func Divide(w http.ResponseWriter, r *http.Request) {
+	result, err := divideValue(100.0, 0.0)
+	if err != nil {
+		fmt.Fprint(w, "can't divide by zero")
+		return
+	}
+	fmt.Fprintf(w, fmt.Sprintf("the actual result %f", result))
+}
+
+func divideValue(x, y float32) (float32, error) {
+	if y <= 0 {
+		err := errors.New("x is not divided by zero")
+		return x, err
+	}
+	result := x / y
+	return result, nil
+}

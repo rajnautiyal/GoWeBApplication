@@ -3,18 +3,14 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"os"
 )
 
+const portNumber = ":8080"
+
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		n, err := fmt.Fprint(w, "hello world")
+	http.HandleFunc("/", Home)
+	http.HandleFunc("/about", About)
 
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Fprint: %v\n", err)
-		}
-		fmt.Print(n, " bytes written.\n")
-
-	})
-	_ = http.ListenAndServe(":8080", nil)
+	fmt.Printf("starting my application server %s", portNumber)
+	_ = http.ListenAndServe(portNumber, nil)
 }
